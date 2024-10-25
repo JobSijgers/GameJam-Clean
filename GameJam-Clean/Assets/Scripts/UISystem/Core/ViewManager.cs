@@ -2,78 +2,79 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace UISystem.Core
 {
     public class ViewManager : MonoBehaviour
     {
-        public static ViewManager instance;
+        public static ViewManager _Instance;
 
         public event UnityAction<View> ViewShow;
         public void OnViewShow(View view) => ViewShow?.Invoke(view);
 
-        [SerializeField] private View startingView;
-        [SerializeField] private View[] allViews;
+        [SerializeField] private View _startingView;
+        [SerializeField] private View[] _allViews;
 
-        private readonly Stack<View> viewHistory = new();
-        private View activeView;
+        private readonly Stack<View> _viewHistory = new();
+        private View _activeView;
 
-        private void Awake() => instance = this;
+        private void Awake() => _Instance = this;
 
         private void Start()
         {
-            foreach (View view in allViews)
+            foreach (View view in _allViews)
             {
                 view.Initialize();
                 view.Hide();
             }
 
-            if (startingView == null)
+            if (_startingView == null)
                 return;
-            ShowView(startingView);
+            ShowView(_startingView);
         }
 
         public void ShowView<T>(bool saveInHistory = true)
         {
-            foreach (View view in allViews)
+            foreach (View view in _allViews)
             {
                 if (view is not T)
                     continue;
-                if (activeView != null)
+                if (_activeView != null)
                 {
                     if (saveInHistory)
                     {
-                        instance.viewHistory.Push(activeView);
+                        _Instance._viewHistory.Push(_activeView);
                     }
-                    activeView.Hide();
+                    _activeView.Hide();
                 }
 
                 view.Show();
-                activeView = view;
+                _activeView = view;
             }
         }
 
         public void ShowView(View view, bool saveInHistory = true)
         {
-            if (activeView != null)
+            if (_activeView != null)
             {
                 if (saveInHistory)
                 {
-                    viewHistory.Push(instance.activeView);
+                    _viewHistory.Push(_Instance._activeView);
                 }
 
-                activeView.Hide();
+                _activeView.Hide();
             }
 
             view.Show();
-            activeView = view;
+            _activeView = view;
         }
 
         public void ShowLastView()
         {
-            if (instance.viewHistory.Count <= 0)
+            if (_Instance._viewHistory.Count <= 0)
                 return;
-            ShowView(instance.viewHistory.Pop());
+            ShowView(_Instance._viewHistory.Pop());
         }
     }
 }
