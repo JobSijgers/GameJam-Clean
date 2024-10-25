@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace UISystem.Core
 {
     public abstract class View : MonoBehaviour
     {
-        [SerializeField] private ViewComponent[] viewComponents;
+        [SerializeField] private ViewComponent[] _viewComponents;
 
         public virtual void Initialize()
         {
-            if (viewComponents == null || viewComponents.Length == 0)
+            if (_viewComponents == null || _viewComponents.Length == 0)
                 return;
 
-            foreach (ViewComponent viewComponent in viewComponents)
+            foreach (ViewComponent viewComponent in _viewComponents)
             {
                 if (viewComponent == null)
                     continue;
@@ -33,7 +34,7 @@ namespace UISystem.Core
 
         private void ShowViewComponents()
         {
-            foreach (ViewComponent viewComponent in viewComponents)
+            foreach (ViewComponent viewComponent in _viewComponents)
             {
                 if (viewComponent == null)
                     continue;
@@ -43,7 +44,7 @@ namespace UISystem.Core
 
         private void HideViewComponents()
         {
-            foreach (ViewComponent viewComponent in viewComponents)
+            foreach (ViewComponent viewComponent in _viewComponents)
             {
                 if (viewComponent == null)
                     continue;
