@@ -10,11 +10,11 @@ public class SlicableObject : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// takes a slice and attempts to find the closest
     /// </summary>
-    protected Plane InterpretSlice()
+    protected Vector2 InterpretSlice(Plane slice)
     {
-        Plane result = new Plane();
+        Vector2 result = new Vector2();
         return result;
     }
 
