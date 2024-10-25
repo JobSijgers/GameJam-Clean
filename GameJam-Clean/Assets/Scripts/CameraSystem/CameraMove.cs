@@ -1,6 +1,4 @@
-﻿using System;
-using Unity.Mathematics;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -19,6 +17,7 @@ namespace CameraSystem
 
         [Header("Move Settings")] [SerializeField]
         private float _moveSpeed = 1f;
+
         [SerializeField] private Vector2 _minMaxX;
         [SerializeField] private Vector2 _minMaxZ;
 
@@ -26,6 +25,8 @@ namespace CameraSystem
         [SerializeField]
         private float _xPanSpeed = 1f;
         [SerializeField] private float _yPanSpeed = 1f;
+        [SerializeField] private float _minPanAngle = 0;
+        [SerializeField] private float _maxPanAngle = 90;
 
         private ECameraState _cameraState = ECameraState.AllowedToMove;
 
@@ -72,18 +73,22 @@ namespace CameraSystem
         }
 
         private void Pan(Vector2 delta)
-        {   
+        {
             delta *= _moveSpeed * Time.deltaTime;
             Vector3 rotation = _cameraPivot.rotation.eulerAngles;
-            rotation.x = Mathf.Clamp(rotation.x - delta.y * _yPanSpeed, 0, 90);
+            rotation.x = Mathf.Clamp(rotation.x - delta.y * _yPanSpeed, _minPanAngle, _maxPanAngle);
             rotation.y += delta.x * _xPanSpeed;
             _cameraPivot.rotation = Quaternion.Euler(rotation);
         }
 
         private void Move(Vector2 delta)
         {
-            delta *= _moveSpeed * Time.deltaTime;
-            _cameraPivot.transform.position += new Vector3(delta.x, 0, delta.y);
+            Vector3 forward = Quaternion.Euler(0, _cameraPivot.rotation.eulerAngles.y, 0) * Vector3.forward;
+            Vector3 right = Quaternion.Euler(0, _cameraPivot.rotation.eulerAngles.y, 0) * Vector3.right;
+
+
+            _cameraPivot.transform.position += (forward * delta.y + right * delta.x) * (_moveSpeed * Time.deltaTime);
+            
             _cameraPivot.transform.position = new Vector3(
                 Mathf.Clamp(_cameraPivot.transform.position.x, _minMaxX.x, _minMaxX.y),
                 _cameraPivot.transform.position.y,
@@ -93,7 +98,10 @@ namespace CameraSystem
         private void Zoom(float delta)
         {
             delta *= _zoomSpeed * Time.deltaTime;
-            _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - delta, _minZoom, _maxZoom);
+            float zPos = _camera.transform.localPosition.z + delta;
+            zPos = Mathf.Clamp(zPos + delta, -_maxZoom, -_minZoom);
+            _camera.transform.localPosition =
+                new Vector3(_camera.transform.localPosition.x, _camera.transform.localPosition.y, zPos);
         }
 
         private void OnEnable()
