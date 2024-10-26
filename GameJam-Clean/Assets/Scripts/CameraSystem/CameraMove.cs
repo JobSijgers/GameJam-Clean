@@ -28,7 +28,7 @@ namespace CameraSystem
         [SerializeField] private float _minPanAngle = 0;
         [SerializeField] private float _maxPanAngle = 90;
 
-        private ECameraState _cameraState = ECameraState.AllowedToMove;
+        private ECameraState _cameraState = ECameraState.MoveCamera;
 
         private PlayerInputActions _inputActions;
         private InputAction _leftMouseButton;
@@ -53,23 +53,26 @@ namespace CameraSystem
 
         private void Update()
         {
-            if (_cameraState != ECameraState.AllowedToMove)
+            Vector2 mouseDelta = _mouseDelta.ReadValue<Vector2>();
+            Vector2 scrollDelta = _scrollDelta.ReadValue<Vector2>();
+            Zoom(scrollDelta.y);
+            
+            if (_rightMouseButton.IsPressed())
+            {
+                Pan(mouseDelta);
+            }
+            if (_cameraState != ECameraState.MoveCamera)
                 return;
 
-            Vector2 mouseDelta = _mouseDelta.ReadValue<Vector2>();
 
             if (_leftMouseButton.IsPressed())
             {
                 Move(mouseDelta);
             }
 
-            if (_rightMouseButton.IsPressed())
-            {
-                Pan(mouseDelta);
-            }
+            
 
-            Vector2 scrollDelta = _scrollDelta.ReadValue<Vector2>();
-            Zoom(scrollDelta.y);
+            
         }
 
         private void Pan(Vector2 delta)

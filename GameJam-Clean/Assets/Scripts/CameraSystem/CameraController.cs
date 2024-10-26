@@ -49,10 +49,16 @@ namespace CameraSystem
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             if (!Physics.Raycast(ray, out RaycastHit hit))
                 return;
-            OnStateUpdate?.Invoke(hit.collider.GetComponent<IRobot>() != null
-                ? ECameraState.AllowedToMove
-                : ECameraState.NotAllowedToMove);
-            
+            IRobot robot = hit.collider.GetComponent<IRobot>();
+            if (robot == null)
+            {
+                _currentState = ECameraState.MoveCamera;
+                OnStateUpdate?.Invoke(_currentState);
+                return;
+            }
+            bool isMoving = robot.IsMoving();
+            _currentState = isMoving ? ECameraState.MoveCamera : ECameraState.MoveRobot;
+            OnStateUpdate?.Invoke(_currentState);
         }
     }
 }
