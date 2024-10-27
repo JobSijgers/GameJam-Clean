@@ -4,8 +4,16 @@ namespace UISystem.Core
 {
     public abstract class ViewComponent : MonoBehaviour
     {
-        public virtual void Initialize() { }
-        public abstract void Show();
-        public abstract void Hide();
+        public virtual void Initialize()
+        {
+        }
+
+        public virtual void Show()
+        {
+        }
+
+        public virtual void Hide()
+        {
+        }
     }
 }
