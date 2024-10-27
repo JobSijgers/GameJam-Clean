@@ -14,6 +14,7 @@ namespace Player
         [SerializeField] private Vector3 _cellOffset = new(0, .5f, 0);
         [SerializeField] private LineRenderer _pathRenderer;
         [SerializeField] private Camera _camera;
+        [SerializeField] private LayerMask _walkableLayer;
 
         [SerializeField] private int _gizmoCount = 20;
 
@@ -65,7 +66,7 @@ namespace Player
                 return;
 
             Ray mouseRay = _camera.ScreenPointToRay(Input.mousePosition);
-            if (!Physics.Raycast(mouseRay, out RaycastHit hit))
+            if (!Physics.Raycast(mouseRay, out RaycastHit hit, 1000f, _walkableLayer))
                 return;
             Vector3Int cell = GetCellThatContainsPosition(hit.point);
 
