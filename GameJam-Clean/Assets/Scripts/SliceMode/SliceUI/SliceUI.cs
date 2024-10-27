@@ -7,29 +7,21 @@ namespace DumbSlicer
     {
         private DumbSlicer _slicer;
         private GameObject _sliceCam;
+        public bool IsBusy { get { return _slicer.IsBusy; } }
 
         private void Awake()
         {
             _slicer = FindAnyObjectByType<DumbSlicer>();
-            _sliceCam = GameObject.FindGameObjectWithTag("SliceCam");
-            _sliceCam.SetActive(false);
         }
 
         public override void Hide()
         {
-            if (_slicer.IsBusy)
-                return;
-
             gameObject.SetActive(false);
-            Camera.main.gameObject.SetActive(true);
-            _sliceCam.SetActive(false);
         }
 
         public override void Show()
         {
             gameObject.SetActive(true);
-            _sliceCam.SetActive(true);
-            Camera.main.gameObject.SetActive(false);
         }
 
         public void Slice(string slice)
