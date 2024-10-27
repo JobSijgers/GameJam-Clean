@@ -1410,25 +1410,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5602449260485440615, guid: 312146d93b7ead440894f94a523a06f8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5602449260485440615, guid: 312146d93b7ead440894f94a523a06f8, type: 3}
-      propertyPath: m_TagString
-      value: SliceCam
-      objectReference: {fileID: 0}
     - target: {fileID: 8858206464502307963, guid: 312146d93b7ead440894f94a523a06f8, type: 3}
       propertyPath: m_Name
       value: slicer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8858206464502307963, guid: 312146d93b7ead440894f94a523a06f8, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 8935889683826293497, guid: 312146d93b7ead440894f94a523a06f8, type: 3}
-      propertyPath: m_Depth
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
