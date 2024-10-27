@@ -2,24 +2,17 @@ using UnityEngine;
 
 public class SlicableObject : MonoBehaviour
 {
-    [SerializeField] private Vector2[] _sliceVariations;
+    private SlicePlane currentSlicePlane = SlicePlane.unsliced;
+    [SerializeField] private SliceVariation[] sliceVariations;
 
-    public void SliceObect(Plane slice)
+    public void SliceObject(SlicePlane plane)
     {
-        
-    }
-
-    /// <summary>
-    /// takes a slice and attempts to find the closest
-    /// </summary>
-    protected Vector2 InterpretSlice(Plane slice)
-    {
-        Vector2 result = new Vector2();
-        return result;
-    }
-
-    protected void ExecuteSlide()
-    {
-
+        if (currentSlicePlane == SlicePlane.unsliced)
+        {
+            foreach (SliceVariation variation in sliceVariations)
+            {
+                variation.variant.SetActive(variation.slicePlane == plane);
+            }
+        }
     }
 }
