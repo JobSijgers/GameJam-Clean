@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a5fd003fbe0574c49b4199eca6d4ccb2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0012772058
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a5fd003fbe0574c49b4199eca6d4ccb2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0012772058
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a5fd003fbe0574c49b4199eca6d4ccb2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0012772058
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a5fd003fbe0574c49b4199eca6d4ccb2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.9024653
       objectReference: {fileID: 0}
@@ -62,15 +74,18 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a5fd003fbe0574c49b4199eca6d4ccb2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3396161102438391494}
+      addedObject: {fileID: 3956418978534517806}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a5fd003fbe0574c49b4199eca6d4ccb2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1301681717282330667}
   m_SourcePrefab: {fileID: 100100000, guid: a5fd003fbe0574c49b4199eca6d4ccb2, type: 3}
 --- !u!1 &3930138165565513150 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a5fd003fbe0574c49b4199eca6d4ccb2, type: 3}
   m_PrefabInstance: {fileID: 4200677608401264879}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &3396161102438391494
-MeshCollider:
+--- !u!65 &3956418978534517806
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -87,7 +102,33 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3247488123920414504, guid: a5fd003fbe0574c49b4199eca6d4ccb2, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 48.911224, y: 90.44124, z: 33.859745}
+  m_Center: {x: 0.000019073486, y: 45.22062, z: 0}
+--- !u!54 &1301681717282330667
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3930138165565513150}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
